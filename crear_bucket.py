@@ -6,11 +6,8 @@ def lambda_handler(event, context):
     try:
         s3 = boto3.client('s3')
         s3.create_bucket(Bucket=bucket_name, ObjectOwnership='BucketOwnerPreferred')
-        s3.put_bucket_acl(
-            Bucket=bucket_name,
-            ACL='public-read-write'
-        )
         
+
         s3.put_public_access_block(
             Bucket=bucket_name,
             PublicAccessBlockConfiguration={
@@ -20,7 +17,10 @@ def lambda_handler(event, context):
                 'RestrictPublicBuckets': False
             }
         )
-
+        s3.put_bucket_acl(
+            Bucket=bucket_name,
+            ACL='public-read-write'
+        )
         
         return {
             'statusCode': 200,
