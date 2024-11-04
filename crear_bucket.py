@@ -4,7 +4,7 @@ import json
 def lambda_handler(event, context):
     bucket_name =  event['body']['nombre']
     try:
-        s3 = boto3.client('s3')
+        s3 = boto3.client('s3', region_name='us-east-1')
         s3.create_bucket(Bucket=bucket_name, ObjectOwnership='BucketOwnerPreferred',
                          CreateBucketConfiguration={
                              'LocationConstraint': 'us-east-1'
@@ -21,8 +21,8 @@ def lambda_handler(event, context):
             }
         )
         s3.put_bucket_acl(
-            Bucket=bucket_name,
-            ACL='public-read-write'
+            ACL='public-read-write',
+            Bucket=bucket_name            
         )
         
         return {

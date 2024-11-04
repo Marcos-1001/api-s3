@@ -5,7 +5,7 @@ def lambda_handler(event, context):
     bucket_name =  event['body']['bucket_nombre']
     dir_name = event['body']['directorio_nombre']
     try:
-        s3 = boto3.client('s3')
+        s3 = boto3.client('s3', region_name='us-east-1')
         s3.put_object(Bucket=bucket_name, Key=dir_name+'/')
 
 

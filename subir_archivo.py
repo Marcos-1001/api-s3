@@ -7,7 +7,7 @@ def lambda_handler(event, context):
     file_name = event['body']['archivo_nombre']
     file_content = event['body']['archivo_contenido']
     try:
-        s3 = boto3.client('s3')
+        s3 = boto3.client('s3',region_name='us-east-1')
         s3.put_object(Bucket=bucket_name, Key=dir+'/'+file_name, Body=file_content)
        
         
