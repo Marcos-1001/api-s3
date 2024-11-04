@@ -16,5 +16,5 @@ def lambda_handler(event, context):
     except Exception as e:
         return {
             'statusCode': 500,
-            'body': json.dumps('Error al crear el directorio')
+            'body': json.dumps(f'Error al crear el directorio {e}')
         }
